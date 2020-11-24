@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
-const pg = require('pg');
+const pg = require('pg'); 
 
-app.listen(3000);
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+//routes
+app.use(require('./routes/rutas'));
+
+app.listen(4000);
 console.log("server listen on port 4000");
