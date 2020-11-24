@@ -1,0 +1,26 @@
+{
+  "name": "bdd",
+  "version": "1.0.0",
+  "description": "Proyecto Bdd api",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darthzner/Bdd.git"
+  },
+  "author": "Lester Carrasco uwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Darthzner/Bdd/issues"
+  },
+  "homepage": "https://github.com/Darthzner/Bdd#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
