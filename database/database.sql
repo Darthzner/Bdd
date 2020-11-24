@@ -9,3 +9,13 @@ CREATE table empleados(
 Insert Into empleados (name, email) Values
     ('pablo', 'pablo@udp.cl'),
     ('pp', 'pp@mail.udp.cl');
+
+CREATE table Productos(
+    id Serial primary key,
+    nombre TEXT,
+    stock integer,
+    precio int,
+    categoria TEXT,
+    descripcion TEXT
+
+);
