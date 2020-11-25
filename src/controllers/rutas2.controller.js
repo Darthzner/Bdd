@@ -30,3 +30,25 @@ const getStock3 = async (req, res) => {
 
 //2
 
+const getPersonalPro = async (req, res) => {
+
+    let sql = `SELECT Personal.Rut, Personal.Nombre, 
+    Personal.Puesto, Cantidades.c_ventas FROM Personal, 
+    (SELECT Personal.Rut, COUNT(venta)
+    as c_ventas FROM Personal, venta
+    WHERE venta.Rut_trabajador = Personal.Rut
+    AND Venta.Fecha BETWEEN 'fecha1' and 'fecha2'
+    GROUP BY Personal.Rut) as Cantidades
+    WHERE Personal.Rut = Cantidades.Rut
+    AND Cantidades.c_ventas = 
+    (SELECT max(Cantidades.c_ventas)
+    FROM (SELECT Personal.Rut, COUNT(venta)
+    as c_ventas FROM Personal, venta
+    WHERE venta.Rut_trabajador = Personal.Rut
+    AND Venta.Fecha BETWEEN 'fecha1' and 'fecha2'
+    GROUP BY Personal.Rut) as Cantidades);`;
+    const response = await pool.query(sql);
+    console.log(response.rows);
+    res.json(response.rows);
+
+}
