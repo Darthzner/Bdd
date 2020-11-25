@@ -21,7 +21,7 @@ const addProduct = (req, res) => {
     let sql = 'Insert into Productos (nombre, stock, precio, categoria, descripcion) values ($1, $2, $3, $4, $5) RETURNING *'
     let values = [nombre, stock, precio, categoria, descripcion]
     pool.query(sql, values)
-    .then(res => console.log(res))
+    .then(res => console.log(res.rows))
     .catch(e => console.error(e.stack))
     res.send('producto ingresado');
 }
@@ -84,7 +84,7 @@ const inVenta = async (req, res) => {
 
 const getStock1 = async (req, res) => {
 
-    const response = await pool.query('SELECT Productos.Nombre, Productos.Stock FROM Producto ORDER BY Productos.Stock ASC;');
+    const response = await pool.query('SELECT Productos.Nombre, Productos.Stock FROM Productos ORDER BY Productos.Stock ASC;');
     console.log(response.rows);
     res.json(response.rows);
 
@@ -92,10 +92,9 @@ const getStock1 = async (req, res) => {
 
 const getStock2 = async (req, res) => {
 
-    const { nombre } = req.query.nombre;
-    let sql = 'SELECT Productos.Stock FROM Productos WHERE Productos.Nombre = "$1";';
-    let value = nombre;
-    const response = await pool.query(sql, value);
+    let nombre = req.query.nombre;
+    let sql = `SELECT Stock FROM Productos WHERE Nombre = '${nombre}';`;
+    const response = await pool.query(sql);
     console.log(response.rows);
     res.json(response.rows);
 
@@ -103,10 +102,9 @@ const getStock2 = async (req, res) => {
 
 const getStock3 = async (req, res) => {
     
-    const { id } = req.query.id;
-    let sql = 'SELECT Productos.Stock FROM Productos WHERE Productos.ID_producto = $1;';
-    let value = id;
-    const response = await pool.query(sql, value);
+    let id = req.query.id;
+    let sql = `SELECT Productos.Stock FROM Productos WHERE Productos.ID_producto = ${id};`;
+    const response = await pool.query(sql);
     console.log(response.rows);
     res.json(response.rows);
 
