@@ -18,7 +18,7 @@ const getStock2 = async (req, res) => {
 }
 
 const getStock3 = async (req, res) => {
-    
+
     const { id } = req.query.id;
     let sql = 'SELECT Productos.Stock FROM Productos WHERE Productos.ID_producto = $1;';
     let value = nombre;
@@ -27,3 +27,6 @@ const getStock3 = async (req, res) => {
     res.json(response.rows);
 
 }
+
+//2
+
