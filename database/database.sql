@@ -69,3 +69,10 @@ create table Detalle_de_compra(
         foreign key (ID_producto)
         references Productos(ID_producto)
 );
+/*{
+		"Rut_cliente" : 20789678,
+    "Rut_trabajador" : 12181281,
+    "precio" : 500000
+   
+    
+}/*

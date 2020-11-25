@@ -17,16 +17,64 @@ const getUsers = async (req, res) => {
 }
 
 const addProduct = async (req, res) => {
-    const { nombre, stock, precio, categoria, descripcion} = req.body;
-    const response = await pool.query('Insert into Productos (nombre, stock, precio, categoria, descripcion) values ($1, $2, $3, $4, $5)', [nombre, stock, precio, categoria, descripcion]);
-    console.log(response);
+    const { nombre, stock, precio, categoria, descripcion} = req.body   
+    let sql = 'Insert into Cliente (nombre, stock, precio, categoria, descripcion) values ($1, $2, $3, $4, $5) RETURNING *'
+    let values = [nombre, stock, precio, categoria, descripcion]
+    pool.query(sql, values)
+    .then(res => console.log(res))
+    .catch(e => console.error(e.stack))
     res.send('producto ingresado');
+}
+
+const inPersonal = (req, res) => {
+    const { nombre, rut, puesto, salario } = req.body;
+    let fecha = new Date();
+    let day = fecha.getDate();
+    let month = fecha.getMonth()+ 1;
+    let year = fecha.getFullYear();
+    let fechita = `${month}/${day}/${year}`;//Año gringoxd
+    let sql = 'Insert into Personal (nombre, rut, puesto, fecha, salario) values ($1, $2, $3, $4, $5) RETURNING *'
+    let values = [nombre, rut, puesto,fechita, salario]
+    pool.query(sql, values)
+    .then(res => console.log(res))
+    .catch(e => console.error(e.stack))
+    res.send('Personal ingresado');
+}
+
+const inCliente =  (req, res) => {
+    const { nombre, rut, direccion, correo } = req.body;
+    let sql = 'Insert into Cliente (nombre, rut, direccion,correo, inscrito) values ($1, $2, $3, $4, $5) RETURNING *'
+    let values = [nombre, rut, direccion, correo, true]
+    pool.query(sql, values)
+    .then(res => console.log(res))
+    .catch(e => console.error(e.stack))
+    
+    res.send('Cliente ingresado');
+}
+
+const inVenta = (req, res) => {
+    let stockA = pool.query(`select stock from productos where productos.ID_producto = ${req.body.ID_producto}`)
+    const { Rut_cliente, Rut_trabajador, precio } = req.body;   
+    let fecha = new Date();
+    let day = fecha.getDate();
+    let month = fecha.getMonth()+ 1;
+    let year = fecha.getFullYear();
+    let fechita = `${month}/${day}/${year}`;//Año gringoxd
+    let sql = 'Insert into Venta (Rut_cliente, Rut_trabajador,Fecha,  precio) values ($1, $2, $3, $4) RETURNING *'
+    let values = [Rut_cliente, Rut_trabajador,fechita, precio]
+    pool.query(sql, values)
+    .then(res => console.log(res.rows[0].id_venta))
+    .catch(e => console.error(e.stack))          
+    res.send('Venta ingresada');
 }
 
 module.exports = {
 
     getUsers,
-    addProduct
+    addProduct,
+    inPersonal,
+    inCliente,
+    inVenta
 }
 
 
