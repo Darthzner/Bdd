@@ -59,7 +59,21 @@ const getProductosVendidos = async (req, res) => {
     FROM Productos, Detalle_de_venta
     WHERE Productos.ID_producto = Detalle_de_venta.ID_producto
     GROUP BY Productos.ID_producto, Productos.Nombre
-    ORDER BY cant ASC`;
+    ORDER BY cant ASC;`;
+    const response = await pool.query(sql);
+    console.log(response.rows);
+    res.json(response.rows);
+}
+
+const getVentasT = async (req, res) => {
+    let sql = `SELECT Producto.ID_producto, Producto.Nombre
+    SUM(Detalle_de_venta.Cantidad) as Cantidad
+    FROM Producto, Venta, Detalle_de_venta WHERE
+    Venta.ID_venta = Detalle_de_venta.ID_venta
+    AND Detalle_de_venta.ID_producto = Producto.ID_producto
+    AND Venta.Fecha BETWEEN 'fecha1' and 'fecha2'
+    GROUP BY Producto.ID_producto, Producto.Nombre
+    ORDER BY Cantidad DESC;`;
     const response = await pool.query(sql);
     console.log(response.rows);
     res.json(response.rows);

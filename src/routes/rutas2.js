@@ -5,7 +5,9 @@ router.get('/getStock3', getStock3);
 
 //2
 
-const { getPersonalPro, getProductosVendidos} = require('../controllers/rutas.controller');
+const { getPersonalPro, getProductosVendidos, getVentasT} = require('../controllers/rutas.controller');
 router.get('/getPersonalPro', getPersonalPro);
 router.get('/getProductosVendidos', getProductosVendidos);
+router.get('/getVentasT', getVentasT);
+
 
