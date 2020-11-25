@@ -1,5 +1,7 @@
 CREATE DATABASE tienda;
 
+SET DATESTYLE TO 'European';
+
 create table Productos(
     ID_producto serial primary key,
     Nombre text,
