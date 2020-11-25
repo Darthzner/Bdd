@@ -16,9 +16,9 @@ const getUsers = async (req, res) => {
 
 }
 
-const addProduct = async (req, res) => {
+const addProduct = (req, res) => {
     const { nombre, stock, precio, categoria, descripcion} = req.body   
-    let sql = 'Insert into Cliente (nombre, stock, precio, categoria, descripcion) values ($1, $2, $3, $4, $5) RETURNING *'
+    let sql = 'Insert into Productos (nombre, stock, precio, categoria, descripcion) values ($1, $2, $3, $4, $5) RETURNING *'
     let values = [nombre, stock, precio, categoria, descripcion]
     pool.query(sql, values)
     .then(res => console.log(res))
@@ -27,6 +27,7 @@ const addProduct = async (req, res) => {
 }
 
 const inPersonal = (req, res) => {
+    
     const { nombre, rut, puesto, salario } = req.body;
     let fecha = new Date();
     let day = fecha.getDate();
@@ -53,7 +54,10 @@ const inCliente =  (req, res) => {
 }
 
 const inVenta = (req, res) => {
-    let stockA = pool.query(`select stock from productos where productos.ID_producto = ${req.body.ID_producto}`)
+    for (let i in req.body.detalle){
+        console.log(i["1"])
+    }
+    //let stockA = pool.query(`select stock from productos where productos.ID_producto = ${req.body.ID_producto}`)
     const { Rut_cliente, Rut_trabajador, precio } = req.body;   
     let fecha = new Date();
     let day = fecha.getDate();
