@@ -66,12 +66,14 @@ const getProductosVendidos = async (req, res) => {
 }
 
 const getVentasT = async (req, res) => {
+    let fecha1 = req.query.fecha1;
+    let fecha2 = req.query.fecha2;
     let sql = `SELECT Producto.ID_producto, Producto.Nombre
     SUM(Detalle_de_venta.Cantidad) as Cantidad
     FROM Producto, Venta, Detalle_de_venta WHERE
     Venta.ID_venta = Detalle_de_venta.ID_venta
     AND Detalle_de_venta.ID_producto = Producto.ID_producto
-    AND Venta.Fecha BETWEEN 'fecha1' and 'fecha2'
+    AND Venta.Fecha BETWEEN '${fecha1}' and '${fecha2}'
     GROUP BY Producto.ID_producto, Producto.Nombre
     ORDER BY Cantidad DESC;`;
     const response = await pool.query(sql);
