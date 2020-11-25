@@ -53,23 +53,63 @@ const inCliente =  (req, res) => {
     res.send('Cliente ingresado');
 }
 
-const inVenta = (req, res) => {
+const inVenta = async (req, res) => {
+    const pasa =true
+    const bdd = await pool.query("select * from productos where ID_producto=1")
+    console.log(bdd.rows[0].stock)
+    var idd 
     for (let i in req.body.detalle){
-        console.log(i["1"])
+        
+        console.log(req.body.detalle[i])
     }
+    if (pasa){
     //let stockA = pool.query(`select stock from productos where productos.ID_producto = ${req.body.ID_producto}`)
-    const { Rut_cliente, Rut_trabajador, precio } = req.body;   
-    let fecha = new Date();
-    let day = fecha.getDate();
-    let month = fecha.getMonth()+ 1;
-    let year = fecha.getFullYear();
-    let fechita = `${month}/${day}/${year}`;//Año gringoxd
-    let sql = 'Insert into Venta (Rut_cliente, Rut_trabajador,Fecha,  precio) values ($1, $2, $3, $4) RETURNING *'
-    let values = [Rut_cliente, Rut_trabajador,fechita, precio]
-    pool.query(sql, values)
-    .then(res => console.log(res.rows[0].id_venta))
-    .catch(e => console.error(e.stack))          
-    res.send('Venta ingresada');
+        const { Rut_cliente, Rut_trabajador, precio } = req.body;   
+        let fecha = new Date();
+        let day = fecha.getDate();
+        let month = fecha.getMonth()+ 1;
+        let year = fecha.getFullYear();
+        let fechita = `${month}/${day}/${year}`;//Año gringoxd
+        let sql = 'Insert into Venta (Rut_cliente, Rut_trabajador,Fecha,  precio) values ($1, $2, $3, $4) RETURNING *'
+        let values = [Rut_cliente, Rut_trabajador,fechita, precio]
+        pool.query(sql, values)
+        .then(res => console.log(res.rows[0].id_venta))
+        .catch(e => console.error(e.stack))          
+        res.send('Venta ingresada');
+    }
+    else{
+        res.send('no se encuentra ')
+    }
+}
+
+const getStock1 = async (req, res) => {
+
+    const response = await pool.query('SELECT Productos.Nombre, Productos.Stock FROM Producto ORDER BY Productos.Stock ASC;');
+    console.log(response.rows);
+    res.json(response.rows);
+
+}
+
+const getStock2 = async (req, res) => {
+
+    const { nombre } = req.query.nombre;
+    let sql = 'SELECT Productos.Stock FROM Productos WHERE Productos.Nombre = "$1";';
+    let value = nombre;
+    const response = await pool.query(sql, value);
+    console.log(response.rows);
+    res.json(response.rows);
+
+}
+
+const getStock3 = async (req, res) => {
+    
+    const { id } = req.query.id;
+    let sql = 'SELECT Productos.Stock FROM Productos WHERE Productos.ID_producto = $1;';
+    let value = id;
+    const response = await pool.query(sql, value);
+    console.log(response.rows);
+    res.json(response.rows);
+
 }
 
 module.exports = {
@@ -78,7 +118,10 @@ module.exports = {
     addProduct,
     inPersonal,
     inCliente,
-    inVenta
+    inVenta,
+    getStock1,
+    getStock2,
+    getStock3
 }
 
 
