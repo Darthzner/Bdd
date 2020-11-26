@@ -54,32 +54,58 @@ const inCliente =  (req, res) => {
 }
 
 const inVenta = async (req, res) => {
-    const pasa =true
-    const bdd = await pool.query("select * from productos where ID_producto=1")
-    console.log(bdd.rows[0].stock)
+    var pasa =true  
+    
     var idd 
     for (let i in req.body.detalle){
         
-        console.log(req.body.detalle[i])
+        let stockBdd = await pool.query(`select stock from productos where ID_producto=${i}`)
+        //console.log(stockBdd.rows[0].stock)
+        //pool.query(`select stock from productos where ID_producto=${i}`).then(res => console.log(res.rows[0].stock))
+        //.catch(e => console.error(e.stack))
+        //console.log(`${req.body.detalle[i]} y ${stockBdd}`)
+        if(req.body.detalle[i]>stockBdd.rows[0].stock){            
+            pasa = false
+            console.log(`El producto con id: ${i} no posee Stock `)
+            
+            
+        }
+        else{
+            pool.query(`update productos set stock= ${stockBdd.rows[0].stock - req.body.detalle[i]} where ID_producto= ${i}`)
+        }        
+        
     }
     if (pasa){
     //let stockA = pool.query(`select stock from productos where productos.ID_producto = ${req.body.ID_producto}`)
-        const { Rut_cliente, Rut_trabajador, precio } = req.body;   
+        const { Rut_cliente, Rut_trabajador, detalle } = req.body;   
         let fecha = new Date();
         let day = fecha.getDate();
         let month = fecha.getMonth()+ 1;
         let year = fecha.getFullYear();
+        var ptotal = 0
+        for (let i in detalle){
+            let precioUnitario = await pool.query(`select precio from productos where ID_producto=${i}`)
+            ptotal += detalle[i]*precioUnitario.rows[0].precio            
+        }
         let fechita = `${month}/${day}/${year}`;//Año gringoxd
         let sql = 'Insert into Venta (Rut_cliente, Rut_trabajador,Fecha,  precio) values ($1, $2, $3, $4) RETURNING *'
-        let values = [Rut_cliente, Rut_trabajador,fechita, precio]
-        pool.query(sql, values)
-        .then(res => console.log(res.rows[0].id_venta))
-        .catch(e => console.error(e.stack))          
+        let values = [Rut_cliente, Rut_trabajador,fechita, ptotal]
+        const b = await pool.query(sql, values)
+        //.then(res => console.log(res.rows[0].id_venta))
+        //.catch(e => console.error(e.stack)) 
+        for (let i in detalle){  
+            console.log("esta weas es"+b.rows[0].id_venta)          
+            let values = [b.rows[0].id_venta, i, detalle[i]]
+            let sql1 = 'Insert into Detalle_de_venta (ID_venta, ID_producto, Cantidad) values ($1, $2, $3) RETURNING *' 
+            pool.query(sql1,values).catch(e => console.error(e.stack))          
+
+        }       
         res.send('Venta ingresada');
     }
     else{
-        res.send('no se encuentra ')
+        res.send(`No se pudo realizar la venta `)
     }
+    
 }
 
 const getStock1 = async (req, res) => {
