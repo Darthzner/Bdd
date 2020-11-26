@@ -59,7 +59,7 @@ const inVenta = async (req, res) => {
     var idd 
     for (let i in req.body.detalle){
         
-        let stockBdd = await pool.query(`select stock from productos where ID_producto=${i}`)
+        let stockBdd = await pool.query(`select stock from productos where ID_producto=${i};`)
         //console.log(stockBdd.rows[0].stock)
         //pool.query(`select stock from productos where ID_producto=${i}`).then(res => console.log(res.rows[0].stock))
         //.catch(e => console.error(e.stack))
@@ -71,7 +71,7 @@ const inVenta = async (req, res) => {
             
         }
         else{
-            pool.query(`update productos set stock= ${stockBdd.rows[0].stock - req.body.detalle[i]} where ID_producto= ${i}`)
+            pool.query(`update productos set stock= ${stockBdd.rows[0].stock - req.body.detalle[i]} where ID_producto= ${i};`)
         }        
         
     }
@@ -84,7 +84,7 @@ const inVenta = async (req, res) => {
         let year = fecha.getFullYear();
         var ptotal = 0
         for (let i in detalle){
-            let precioUnitario = await pool.query(`select precio from productos where ID_producto=${i}`)
+            let precioUnitario = await pool.query(`select precio from productos where ID_producto=${i};`)
             ptotal += detalle[i]*precioUnitario.rows[0].precio            
         }
         let fechita = `${month}/${day}/${year}`;//Año gringoxd
@@ -229,6 +229,17 @@ const getAllProd = async (req, res) => {
     console.log(response.rows);
     res.json(response.rows);
 
+}
+
+const addStock = async (req, res) => {
+
+    let id = req.query.id;
+    let stock = req.query.stock;
+    let sqlStockPrev = `select Productos.Stock from Productos where Productos.ID_producto = ${id};`;
+    const stockPrev = await pool.query(sqlStockPrev);
+    let newStock = stock + stockPrev.rows[0].stock;
+    let sql = `update Productos set stock = ${newStock} where ID_producto= ${id};`;
+    const response = await pool.query(sql);
 }
 
 module.exports = {
