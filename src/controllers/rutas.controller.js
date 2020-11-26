@@ -10,7 +10,7 @@ const pool = new Pool({
 
 const getUsers = async (req, res) => {
 
-    const response = await pool.query('Select * from empleados');
+    const response = await pool.query('Select * from Personal;');
     console.log(response.rows);
     res.json(response.rows);
 
