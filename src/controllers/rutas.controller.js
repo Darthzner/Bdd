@@ -214,12 +214,21 @@ const getProducto = async (req, res) => {
 const getVenta = async (req, res) => {
     let id = req.query.id;
     let sql = `select * from Venta where Venta.ID_Venta = ${id};`;
-    let sql2 = `select * from Detalle_de_venta where Detalle_de_venta.ID_venta = ${id}:`;
+    let sql2 = `select * from Detalle_de_venta where Detalle_de_venta.ID_venta = ${id};`;
     const response = await pool.query(sql);
     const response2 = await pool.query(sql2);
     console.log(response.rows);
     console.log(response2.rows);
     res.json(response.rows, response2.rows);
+}
+
+const getAllProd = async (req, res) => {
+
+    let sql = `select * from Productos;`;
+    const response = await pool.query(sql);
+    console.log(response.rows);
+    res.json(response.rows);
+
 }
 
 module.exports = {
@@ -238,7 +247,8 @@ module.exports = {
     getCliente,
     getPersonal,
     getProducto,
-    getVenta
+    getVenta,
+    getAllProd
 }
 
 

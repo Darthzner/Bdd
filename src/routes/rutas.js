@@ -17,10 +17,11 @@ router.get('/getProductosVendidos', getProductosVendidos);
 router.get('/getVentasT', getVentasT);
 
 
-const { getCliente, getPersonal, getProducto, getVenta } = require('../controllers/rutas.controller');
+const { getCliente, getPersonal, getProducto, getVenta, getAllProd } = require('../controllers/rutas.controller');
 router.get('/getCliente', getCliente);
 router.get('/getPersonal', getPersonal);
 router.get('/getProducto', getProducto);
 router.get('/getVenta', getVenta);
+router.get('/getAllProd', getAllProd);
 
 module.exports = router;
