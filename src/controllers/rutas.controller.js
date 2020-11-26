@@ -9,7 +9,7 @@ const pool = new Pool({
 });
 
 const getUsers = async (req, res) => {
-
+    res.header("Access-Control-Allow-Origin", "*");
     const response = await pool.query('Select * from Personal;');
     console.log(response.rows);
     res.json(response.rows);
@@ -17,6 +17,7 @@ const getUsers = async (req, res) => {
 }
 
 const addProduct = (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     const { nombre, stock, precio, categoria, descripcion} = req.body   
     let sql = 'Insert into Productos (nombre, stock, precio, categoria, descripcion) values ($1, $2, $3, $4, $5) RETURNING *'
     let values = [nombre, stock, precio, categoria, descripcion]
@@ -27,7 +28,7 @@ const addProduct = (req, res) => {
 }
 
 const inPersonal = (req, res) => {
-    
+    res.header("Access-Control-Allow-Origin", "*");
     const { nombre, rut, puesto, salario } = req.body;
     let fecha = new Date();
     let day = fecha.getDate();
@@ -43,6 +44,7 @@ const inPersonal = (req, res) => {
 }
 
 const inCliente =  (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     const { nombre, rut, direccion, correo } = req.body;
     let sql = 'Insert into Cliente (nombre, rut, direccion,correo, inscrito) values ($1, $2, $3, $4, $5) RETURNING *'
     let values = [nombre, rut, direccion, correo, true]
@@ -54,6 +56,7 @@ const inCliente =  (req, res) => {
 }
 
 const inVenta = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     var pasa =true  
     for (let i in req.body.detalle){
         
@@ -107,6 +110,7 @@ const inVenta = async (req, res) => {
 }
 
 const getStock1 = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
 
     const response = await pool.query('SELECT Productos.Nombre, Productos.Stock FROM Productos ORDER BY Productos.Stock ASC;');
     console.log(response.rows);
@@ -115,6 +119,7 @@ const getStock1 = async (req, res) => {
 }
 
 const getStock2 = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
 
     let nombre = req.query.nombre;
     let sql = `SELECT Stock FROM Productos WHERE Nombre = '${nombre}';`;
@@ -125,6 +130,7 @@ const getStock2 = async (req, res) => {
 }
 
 const getStock3 = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     
     let id = req.query.id;
     let sql = `SELECT Productos.Stock FROM Productos WHERE Productos.ID_producto = ${id};`;
@@ -135,6 +141,7 @@ const getStock3 = async (req, res) => {
 }
 
 const getPersonalPro = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let fecha1 = req.query.fecha1;
     let fecha2 = req.query.fecha2;
     let sql = `SELECT Personal.Rut, Personal.Nombre, 
@@ -158,6 +165,7 @@ const getPersonalPro = async (req, res) => {
 }
 
 const getProductosVendidos = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let sql = `SELECT Productos.ID_producto, Productos.Nombre,
     SUM(Detalle_de_venta.Cantidad) as cant
     FROM Productos, Detalle_de_venta
@@ -170,6 +178,7 @@ const getProductosVendidos = async (req, res) => {
 }
 
 const getVentasT = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let fecha1 = req.query.fecha1;
     let fecha2 = req.query.fecha2;
     let sql = `SELECT Productos.ID_producto, Productos.Nombre,
@@ -186,6 +195,7 @@ const getVentasT = async (req, res) => {
 }
 
 const getCliente = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let rut = req.query.rut;
     let sql = `select * from Cliente where Cliente.rut = ${rut};`;
     const response = await pool.query(sql);
@@ -194,6 +204,7 @@ const getCliente = async (req, res) => {
 }
 
 const getPersonal = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let rut = req.query.rut;
     let sql = `select * from Personal where Personal.rut = ${rut};`;
     const response = await pool.query(sql);
@@ -202,6 +213,7 @@ const getPersonal = async (req, res) => {
 }
 
 const getProducto = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let id = req.query.id;
     let sql = `select * from Productos where Productos.ID_producto = ${id};`;
     const response = await pool.query(sql);
@@ -210,6 +222,7 @@ const getProducto = async (req, res) => {
 }
 
 const getVenta = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     let id = req.query.id;
     let sql = `select * from Venta where Venta.ID_Venta = ${id};`;
     let sql2 = `select * from Detalle_de_venta where Detalle_de_venta.ID_venta = ${id};`;
@@ -223,6 +236,7 @@ const getVenta = async (req, res) => {
 }
 
 const getAllProd = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
 
     let sql = `select * from Productos;`;
     const response = await pool.query(sql);
@@ -232,6 +246,7 @@ const getAllProd = async (req, res) => {
 }
 
 const addStock = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
 
     let id = req.query.id;
     let stock = req.query.stock;
