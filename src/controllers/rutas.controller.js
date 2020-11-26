@@ -55,8 +55,6 @@ const inCliente =  (req, res) => {
 
 const inVenta = async (req, res) => {
     var pasa =true  
-    
-    var idd 
     for (let i in req.body.detalle){
         
         let stockBdd = await pool.query(`select stock from productos where ID_producto=${i};`)
@@ -80,14 +78,14 @@ const inVenta = async (req, res) => {
         const { Rut_cliente, Rut_trabajador, detalle } = req.body;   
         let fecha = new Date();
         let day = fecha.getDate();
-        let month = fecha.getMonth()+ 1;
+        let month = fecha.getMonth() + 1;
         let year = fecha.getFullYear();
         var ptotal = 0
         for (let i in detalle){
             let precioUnitario = await pool.query(`select precio from productos where ID_producto=${i};`)
-            ptotal += detalle[i]*precioUnitario.rows[0].precio            
+            ptotal += detalle[i]*precioUnitario.rows[0].precio
         }
-        let fechita = `${month}/${day}/${year}`;//Año gringoxd
+        let fechita = `${day}/${month}/${year}`;//Año europeo pls xd
         let sql = 'Insert into Venta (Rut_cliente, Rut_trabajador,Fecha,  precio) values ($1, $2, $3, $4) RETURNING *'
         let values = [Rut_cliente, Rut_trabajador,fechita, ptotal]
         const b = await pool.query(sql, values)
@@ -217,9 +215,11 @@ const getVenta = async (req, res) => {
     let sql2 = `select * from Detalle_de_venta where Detalle_de_venta.ID_venta = ${id};`;
     const response = await pool.query(sql);
     const response2 = await pool.query(sql2);
-    console.log(response.rows);
-    console.log(response2.rows);
-    res.json(response.rows, response2.rows);
+    const venta = response.rows[0];
+    const detalle = response2.rows;
+    const c = {venta,detalle};
+    console.log(c);
+    res.json(c);
 }
 
 const getAllProd = async (req, res) => {
@@ -237,9 +237,11 @@ const addStock = async (req, res) => {
     let stock = req.query.stock;
     let sqlStockPrev = `select Productos.Stock from Productos where Productos.ID_producto = ${id};`;
     const stockPrev = await pool.query(sqlStockPrev);
-    let newStock = stock + stockPrev.rows[0].stock;
+    let newStock = Number(stock) + Number(stockPrev.rows[0].stock);
     let sql = `update Productos set stock = ${newStock} where ID_producto= ${id};`;
     const response = await pool.query(sql);
+    console.log(response.rows);
+    res.json(response.rows);
 }
 
 module.exports = {
