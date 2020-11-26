@@ -259,7 +259,8 @@ module.exports = {
     getPersonal,
     getProducto,
     getVenta,
-    getAllProd
+    getAllProd,
+    addStock
 }
 
 
