@@ -115,5 +115,5 @@ const getVenta = async (req, res) => {
     const response2 = await pool.query(sql2);
     console.log(response.rows);
     console.log(response2.rows);
-    res.json(response.rows,response2.rows);
+    res.json(response.rows, response2.rows);
 }

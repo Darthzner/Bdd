@@ -11,10 +11,9 @@ router.get('/getStock1', getStock1);
 router.get('/getStock2', getStock2);
 router.get('/getStock3', getStock3);
 
-const { getPersonalPro, getProductosVendidos, getVentasT} = require('../controllers/rutas.controller');
+const { getPersonalPro, getProductosVendidos, getVentasT } = require('../controllers/rutas.controller');
 router.get('/getPersonalPro', getPersonalPro);
 router.get('/getProductosVendidos', getProductosVendidos);
 router.get('/getVentasT', getVentasT);
-
 
 module.exports = router;

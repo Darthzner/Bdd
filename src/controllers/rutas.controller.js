@@ -33,8 +33,8 @@ const inPersonal = (req, res) => {
     let day = fecha.getDate();
     let month = fecha.getMonth()+ 1;
     let year = fecha.getFullYear();
-    let fechita = `${month}/${day}/${year}`;//Año gringoxd
-    let sql = 'Insert into Personal (nombre, rut, puesto, fecha, salario) values ($1, $2, $3, $4, $5) RETURNING *'
+    let fechita = `'${day}/${month}/${year}'`;//Año gringoxd
+    let sql = 'Insert into Personal (nombre, rut, puesto, fecha_empleo, salario) values ($1, $2, $3, $4, $5) RETURNING *'
     let values = [nombre, rut, puesto,fechita, salario]
     pool.query(sql, values)
     .then(res => console.log(res))
@@ -148,14 +148,14 @@ const getProductosVendidos = async (req, res) => {
 const getVentasT = async (req, res) => {
     let fecha1 = req.query.fecha1;
     let fecha2 = req.query.fecha2;
-    let sql = `SELECT Producto.ID_producto, Producto.Nombre
-    SUM(Detalle_de_venta.Cantidad) as Cantidad
-    FROM Producto, Venta, Detalle_de_venta WHERE
+    let sql = `SELECT Productos.ID_producto, Productos.Nombre,
+    SUM(Detalle_de_venta.Cantidad) as Cant
+    FROM Productos, Venta, Detalle_de_venta WHERE
     Venta.ID_venta = Detalle_de_venta.ID_venta
-    AND Detalle_de_venta.ID_producto = Producto.ID_producto
+    AND Detalle_de_venta.ID_producto = Productos.ID_producto
     AND Venta.Fecha BETWEEN '${fecha1}' and '${fecha2}'
-    GROUP BY Producto.ID_producto, Producto.Nombre
-    ORDER BY Cantidad DESC;`;
+    GROUP BY Productos.ID_producto, Productos.Nombre
+    ORDER BY Cant DESC;`;
     const response = await pool.query(sql);
     console.log(response.rows);
     res.json(response.rows);
