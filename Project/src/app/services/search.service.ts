@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
+  private api  = `http://190.163.174.21:5000/`;
 
-  public url: string;
-
-  constructor(private http: HttpClient) {
-    this.url = "assets/json/datos.json";
-   }
+  constructor(private http: HttpClient) {}
 
    getSearch(){
-     return this.http.get(this.url);
+     const path = `${this.api}getAllProd`;
+     return this.http.get(path);
    }
+   
 }

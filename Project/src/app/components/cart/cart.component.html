@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="all">
+  <div class="Cart">
+    <div class="title">
+      Carrito
+    </div>
+      <table >
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+        </tr>
+        <tr *ngFor="let item of CartItem | keyvalue">
+          <th>{{item.key}}</th>
+          <th>x</th>
+          <th>{{item.value}}</th>
+          <th><button>eliminar</button></th>
+        </tr>
+      </table>
+  </div>
+</div>
+
+<button routerLink="/">Regresar</button>
+<p>cart works!</p>
