@@ -1,0 +1,73 @@
+<div class="row">
+	<div class="column">
+		<div class="col-md-10 offset-md-1 mt-4">
+			<form #c="ngForm" (ngSubmit)="AddClient(c)">
+				<div class="form-group">
+					<label for="RegisterName">Nombre</label>
+					<input type="text" name="nombre" ngModel required #nombre="ngModel"
+					class="form-control" 
+					id="RegisterName" 
+					placeholder="Nombre">
+				</div>
+				<div class="form-group">
+					<label for="RegisterRut">Rut</label>
+					<input type="number" name="rut" ngModel required #rut="ngModel"
+					class="form-control" 
+					id="RegisterRut" 
+					placeholder="Enter rut">
+				</div>
+				<div class="form-group">
+					<label for="RegisterAddress">Dirección</label>
+					<input type="text" name="direccion" ngModel required #direccion="ngModel"
+					class="form-control" 
+					id="RegisterAddress" 
+					placeholder="Dirección">
+				</div>
+				<div class="form-group">
+					<label for="RegisterEmail">Email</label>
+					<input type="email" name="correo" ngModel required #correo="ngModel"
+					class="form-control" 
+					id="RegisterEmail" 
+					placeholder="Enter email">
+				</div>
+				<button type="submit" [disabled]="c.invalid" class="btn btn-primary">Registrar cliente<i clas="fas fa-sign-in-alt"></i></button>
+			</form>
+		</div>
+	</div>
+
+	<div class="column">
+		<div class="col-md-10 offset-md-0 mt-4">
+			<form #e="ngForm" (ngSubmit)="AddEmployer(e)">
+				<div class="form-group">
+					<label for="RegisterName">Nombre</label>
+					<input type="text" name="nombre" ngModel required #nombre="ngModel"
+					class="form-control" 
+					id="RegisterName" 
+					placeholder="Nombre">
+				</div>
+				<div class="form-group">
+					<label for="RegisterRut">Rut</label>
+					<input type="number" name="rut" ngModel required #rut="ngModel"
+					class="form-control" 
+					id="RegisterRut" 
+					placeholder="Enter rut">
+				</div>
+				<div class="form-group">
+					<label for="RegisterPuesto">Puesto</label>
+					<input type="text" name="puesto" ngModel required #puesto="ngModel"
+					class="form-control" 
+					id="RegisterPuesto" 
+					placeholder="Enter puesto">
+				</div>
+				<div class="form-group">
+					<label for="RegisterSalario">Salario</label>
+					<input type="number" name="salario" ngModel required #salario="ngModel"
+					class="form-control" 
+					id="RegisterSalario" 
+					placeholder="Salario">
+				</div>
+				<button type="submit" [disabled]="e.invalid" class="btn btn-primary">Registrar empleado<i clas="fas fa-sign-in-alt"></i></button>
+			</form>
+		</div>
+	</div>
+</div>
