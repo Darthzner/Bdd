@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 	styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+	Caso1='';
+	Caso2='';
 
 	constructor(private authService: AuthService) { }
 
@@ -31,12 +33,14 @@ export class RegisterComponent implements OnInit {
 
 		this.authService.get_client(model).subscribe(data => {this.data =data;
 			if(typeof data[0] ==='undefined'){
+				this.Caso1='Se creo con exito.';
 				console.log("Se creo.");
 				this.authService.register_client(model).subscribe(res=>{
 					alert(res.toString());
 				});
 			}
 			else{
+				this.Caso1='Ya existe.';
 				console.log("Ya existe.");
 			}
 		});
@@ -50,12 +54,14 @@ export class RegisterComponent implements OnInit {
 
 		this.authService.get_employer(model).subscribe(data => {this.data =data;
 			if(typeof data[0] ==='undefined'){
+				this.Caso2='Se creo con exito.';
 				console.log("Se creo.");
 				this.authService.register_employer(model).subscribe(res=>{
 					alert(res.toString());
 				});
 			}
 			else{
+				this.Caso2='Ya existe.';
 				console.log("Ya existe.");
 			}
 		});
