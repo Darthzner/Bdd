@@ -18,15 +18,9 @@ export class RegisterComponent implements OnInit {
 	correo:any;
 	puesto:any;
 	salario:any;
-	res:any=[];
 	data:any;
 
 	ngOnInit(): void {
-	}
-
-	Check_data(model: any){
-		this.authService.get_client(model).subscribe(async data => {this.data = await data;
-			console.log(this.data[0]);});
 	}
 
 	AddClient(f: NgForm) {
@@ -35,12 +29,16 @@ export class RegisterComponent implements OnInit {
 								direccion:f.value.direccion,
 								correo:f.value.correo};
 
-		//this.Check_data(model);
-		
-		//console.log(this.data);
-
-		this.authService.register_client(model).subscribe(res=>{
-			alert(res.toString());
+		this.authService.get_client(model).subscribe(data => {this.data =data;
+			if(typeof data[0] ==='undefined'){
+				console.log("Se creo.");
+				this.authService.register_client(model).subscribe(res=>{
+					alert(res.toString());
+				});
+			}
+			else{
+				console.log("Ya existe.");
+			}
 		});
 	}
 
@@ -50,8 +48,16 @@ export class RegisterComponent implements OnInit {
 								puesto:f.value.puesto,
 								salario:f.value.salario};
 
-		this.authService.register_employer(model).subscribe(res=>{
-			alert(res.toString());
+		this.authService.get_employer(model).subscribe(data => {this.data =data;
+			if(typeof data[0] ==='undefined'){
+				console.log("Se creo.");
+				this.authService.register_employer(model).subscribe(res=>{
+					alert(res.toString());
+				});
+			}
+			else{
+				console.log("Ya existe.");
+			}
 		});
 	}
 }
