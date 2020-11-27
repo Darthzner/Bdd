@@ -8,9 +8,16 @@ const pool = new Pool({
     port: '5432'
 });
 
-const getUsers = async (req, res) => {
+const getAllPersonal = async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const response = await pool.query('Select * from Personal;');
+    console.log(response.rows);
+    res.json(response.rows);
+
+}
+const getAllClients = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const response = await pool.query('Select * from Cliente;');
     console.log(response.rows);
     res.json(response.rows);
 
@@ -261,7 +268,8 @@ const addStock = async (req, res) => {
 
 module.exports = {
 
-    getUsers,
+    getAllPersonal,
+    getAllClients,
     addProduct,
     inPersonal,
     inCliente,

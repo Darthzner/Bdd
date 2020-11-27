@@ -1,8 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getUsers, addProduct, inPersonal, inCliente, inVenta, getStock1, getStock2, getStock3 } = require('../controllers/rutas.controller');
-router.get('/users', getUsers);
+const { addProduct, inPersonal, inCliente, inVenta, getStock1, getStock2, getStock3, getAllClients, getAllPersonal } = require('../controllers/rutas.controller');
+router.get('/getAllClientes', getAllClients);
+router.get('/getAllPersonal', getAllPersonal);
 router.post('/addProducto', addProduct);
 router.post('/addEmployer', inPersonal);
 router.post('/addClient', inCliente);
