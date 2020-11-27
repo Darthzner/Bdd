@@ -266,6 +266,29 @@ const addStock = async (req, res) => {
     res.json(response.rows);
 }
 
+const getAllVentas = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    let sql = `select * from Ventas;`;
+    const response = await pool.query(sql);
+    console.log(response.rows);
+    res.json(response.rows);
+
+}
+
+const getIngresosT = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    let fecha1 = req.query.fecha1;
+    let fecha2 = req.query.fecha2;
+    let sql = `SELECT sum(Venta.Precio)
+    FROM Venta WHERE
+    Venta.Fecha BETWEEN '${fecha1}' and '${fecha2}'
+    GROUP BY Productos.ID_producto, Productos.Nombre;`;
+    const response = await pool.query(sql);
+    console.log(response.rows);
+    res.json(response.rows);
+}
+
 module.exports = {
 
     getAllPersonal,
@@ -285,7 +308,9 @@ module.exports = {
     getProducto,
     getVenta,
     getAllProd,
-    addStock
+    addStock,
+    getAllVentas,
+    getIngresosT
 }
 
 

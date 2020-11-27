@@ -26,4 +26,8 @@ router.get('/getVenta', getVenta);
 router.get('/getAllProd', getAllProd);
 router.get('/addStock', addStock);
 
+const { getAllVentas, getIngresosT } = require('../controllers/rutas.controller');
+router.get('/getAllVentas',getAllVentas);
+router.get('/getIngresosT',getIngresosT);
+
 module.exports = router;
