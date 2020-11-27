@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 const pg = require('pg'); 
+const cors = require('cors')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors());
+
 
 //routes
 app.use(require('./routes/rutas'));
