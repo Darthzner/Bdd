@@ -23,4 +23,10 @@ export class GetallService {
 	getAllVentas():Observable<any[]>{
 		return this.http.get<any>(this.APIUrl+'/getAllVentas');
 	}
+	getStock():Observable<any[]>{
+		return this.http.get<any>(this.APIUrl+'/getstock1');
+	}
+	getProdVendido():Observable<any[]>{
+		return this.http.get<any>(this.APIUrl+'/getProductosVendidos');
+	}
 }
