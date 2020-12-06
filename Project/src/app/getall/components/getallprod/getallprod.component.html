@@ -1,0 +1,32 @@
+<body>
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1>Productos.</h1>
+			<p id="demo"><p>
+		</div>
+	</section>
+	<div class="alert alert-primary" role="alert">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Stock</th>
+					<th>Precio</th>
+					<th>Categoria</th>
+					<th>Descripcion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let dataItem of Productos">
+					<td>{{dataItem.id_producto}}</td>
+					<td>{{dataItem.nombre}}</td>
+					<td>{{dataItem.stock}}</td>
+					<td>{{dataItem.precio}}</td>
+					<td>{{dataItem.categoria}}</td>
+					<td>{{dataItem.descripcion}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>

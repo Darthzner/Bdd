@@ -1,0 +1,30 @@
+<body>
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1>Empleados.</h1>
+			<p id="demo"><p>
+		</div>
+	</section>
+	<div class="alert alert-primary" role="alert">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Rut Cliente</th>
+					<th>Rut Trabajador</th>
+					<th>Fecha</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let dataItem of Ventas">
+					<td>{{dataItem.id_venta}}</td>
+					<td>{{dataItem.rut_cliente}}</td>
+					<td>{{dataItem.rut_trabajador}}</td>
+					<td>{{dataItem.fecha}}</td>
+					<td>{{dataItem.precio}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>

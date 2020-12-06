@@ -1,0 +1,27 @@
+<body>
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1>Empleados.</h1>
+			<p id="demo"><p>
+		</div>
+	</section>
+	<div class="alert alert-primary" role="alert">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Cantidad</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let dataItem of ProdVenta">
+					<td>{{dataItem.id_producto}}</td>
+					<td>{{dataItem.nombre}}</td>
+					<td>{{dataItem.cant}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+

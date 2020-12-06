@@ -16,7 +16,8 @@ export class GetallclientesComponent implements OnInit {
     this.RefreshClients();
   }
 
-  RefreshClients(){
+  RefreshClients()
+  {
   	this.service.getAllClientes().subscribe(data=>{
   		this.Clientes=data;
   	});

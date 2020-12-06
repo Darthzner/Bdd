@@ -16,7 +16,8 @@ export class GetallpersonalComponent implements OnInit {
   	this.RefreshPersonal();
   }
 
-  RefreshPersonal(){
+  RefreshPersonal()
+  {
   	this.service.getAllPersonal().subscribe(data=>{
   		this.Personal=data;
   	});
