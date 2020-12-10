@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+	 box-sizing: border-box;
+	 margin: 0;
+	 padding: 0;
+	 color: #edf0f1;
+}
+
+li, a, button{
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	color: #24252a;
+	text-decoration: none;
+}
+
+header{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 30px 10%;
+}
+
+.logo{
+	cursor: pointer;
+	margin-right: auto;
+}
+
+.navs_links{
+	list-style: none;
+}
+
+.navs_links li {
+	display: inline-block;
+	padding: 0px 20px;
+}
+
+.navs_links li a{
+	transition: all 0.3s ease 0s;
+}
+
+.navs_links li a:hover{
+	color: #0088a9;
+}
+
+button{
+	margin-left: 10px;
+	padding: 9px 25px;
+	background-color: rgba(0, 136, 169, 1);
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+button:hover{
+	background-color: rgba(0, 136, 169, 0.8);
+}
+
+main{
+	display: grid;
+	grid-template-columns: 1fr repeat(12, minmax(auto,60px)) 1fr;
+	grid-gap: 40px;
+	padding: 60px 0;
+}
+
+h1 {
+	font-family: 'Open Sans', sans-serif;
+	max-width: 340px;
+	margin: 20px auto;
+	font-size: 28px;
+	color: #24252a;
+
+}
+
+.text--medium{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 400;
+	color: #24252a;
+}
+
+.cards{
+	grid-column: 2 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, minmax(auto,60px));
+	grid-gap: 40px;
+}
+
+.card{
+	grid-column-end: span 4;
+	display: flex;
+	flex-direction: column;
+	background-color: #ecf0f1;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+.card:hover{
+	transform: translateY(-7px);
+}
+
+.card_image_container{
+	width: 100%;
+	padding-top: 56.25%;
+	overflow: hidden;
+	position: relative;
+}
+
+.card_image_container img{
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;	
+	transform: translate(-50%, -50%);
+}
+
+.card__content{
+	padding: 20px;
+}
+
+.card__title{
+	margin-bottom: 20px;
+}
+
+.card__info{
+	display: flex;
+	align-self: end;
+	align-items: center;
+}
+
+.card__price{
+	margin-left: auto;
+	padding: 5px 20px;
+	background-color: rgba(0, 136, 169, 1);
+	border-radius: 20px;
+}
+
+@media only screen and (max-width: 1000px){
+	main{
+		grid-template-columns: 10px repeat(6, 1fr) 10px;
+		grid-gap: 20px;
+	}
+	.cards{
+		grid-column-end: 2 /spam 0;
+		grid-template-columns: repeat(6, 1fr);
+		grid-gap: 20px;
+	}
+	.card{
+		grid-column-end: span 6;
+	}
+}
