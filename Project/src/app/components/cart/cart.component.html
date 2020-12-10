@@ -12,13 +12,17 @@
         </tr>
         <tr *ngFor="let item of CartItem | keyvalue">
           <th>{{item.key}}</th>
-          <th>x</th>
-          <th>{{item.value}}</th>
-          <th><button>eliminar</button></th>
+          <th>{{item.value.cantidad}}</th>
+          <th>{{Totalprice(item.key)}}</th>
+          <th><button (click)="RemoveItem(item.key)">Eliminar</button></th>
         </tr>
       </table>
+      <div class="Compra">
+        <button>Comprar</button>
+      </div> 
   </div>
 </div>
 
-<button routerLink="/">Regresar</button>
-<p>cart works!</p>
+<a class="cta" href="#"><button routerLink="/">Regresar</button></a>
+
+
