@@ -1,3 +1,3 @@
 export let Ruta = {
-  url: "https://localhost:4000/"
+  url: "190.163.174.21:5000/"
 }
