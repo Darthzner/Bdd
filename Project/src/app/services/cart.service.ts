@@ -6,22 +6,10 @@ import { HttpClient } from '@angular/common/http';
   
 })
 export class CartService {
-  cartItems = [];
-  private api  = `http://localhost:4200/`;
+  private api  = `http://190.163.174.21:5000/`;
   
 
   constructor(private http: HttpClient) { }
 
-  addCart($s){
-    this.cartItems.push($s);
-  }
-
-  getCartItems(){
-    return this.cartItems
-  }
-
-  clearCart(){
-    this.cartItems = [];
-  }
-
 }
+
