@@ -93,3 +93,45 @@ h1 {
 		grid-column-end: span 6;
 	}
 }
+
+input {
+  text-align: center;  
+  border: 1px solid #6C757D;
+} 
+
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+  }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+
+.wrapper {
+  border: 1px #dcd3d3 solid;
+  width: 8vw;
+  height: 25px;
+  padding: 5px;
+  display: flex;
+	border-radius: 15px;
+	margin: auto;
+}
+
+.plusminus {
+  height: 100%;
+  width: 30%;
+  background: white;
+  border: none;
+  font-size: 20px;
+  color: #5f5fce;
+}
+
+.num {
+  height: 91%;
+  width: 30%;
+  border: none;
+  font-size: 20px;
+}

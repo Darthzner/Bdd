@@ -1,7 +1,7 @@
 <h1>Categorias de Productos</h1>
   <div class="main">
     <section class="cards">
-      <div class="card" *ngFor="let search of searchJson">
+      <div class="card" *ngFor="let search of searchJson; let ind = index" >
         <div class="card_image_container">
           <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"/>
         </div>
@@ -10,13 +10,18 @@
             {{search.nombre}}
           </p>
           <div class="card__info">
-            <p class="text--medium">{{search.stock}}</p>
-            <form action="">
+            <p class="text--medium">{{search.descripcion}}</p>
+            <!--<form action="">
               <label for="quantity">Cantidad:</label>
               <input type="number" id="quantity" name="quantity" min="1">
               <input type="submit" value="Submit">
-            </form>
-            <button class="card__price text--medium" (click)="Data(search)">{{search.precio}}</button>
+            </form>-->
+            <button class="card__price text--medium" (click)="Data(search, product_list[ind])">{{search.precio}}</button>
+          </div>
+          <div class="wrapper">
+            <button class="plusminus" (click)="handleMinus(ind)">-</button>
+            <input type="number" class="num" value="0" [(ngModel)]="product_list[ind]" />
+            <button class="plusminus" (click)="handlePlus(ind)">+</button>
           </div>
         </div>
       </div>
