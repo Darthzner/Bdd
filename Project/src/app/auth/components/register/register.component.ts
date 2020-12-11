@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	AddClient(f: NgForm) {
+	AddClient(f: NgForm)
+	{
 		var model = {rut:f.value.rut,
 								nombre:f.value.nombre,
 								direccion:f.value.direccion,

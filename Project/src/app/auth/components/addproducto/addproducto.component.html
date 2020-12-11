@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="column">
+		<div class="col-md-10 offset-md-1 mt-4">
+			<form #c="ngForm" (ngSubmit)="AddProducto(c)">
+				<div class="form-group">
+					<label for="RegisterName">Nombre</label>
+					<input type="text" name="nombre" ngModel required #nombre="ngModel"
+					class="form-control" 
+					id="RegisterName" 
+					placeholder="Nombre">
+				</div>
+				<div class="form-group">
+					<label for="RegisterRut">Stock</label>
+					<input type="number" name="stock" ngModel required #stock="ngModel"
+					class="form-control" 
+					id="RegisterRut" 
+					placeholder="Enter stock">
+				</div>
+				<div class="form-group">
+					<label for="RegisterAddress">Precio</label>
+					<input type="number" name="precio" ngModel required #precio="ngModel"
+					class="form-control" 
+					id="RegisterAddress" 
+					placeholder="Precio">
+				</div>
+				<div class="form-group">
+					<label for="Registercategoria">Categoria</label>
+					<input type="text" name="categoria" ngModel required #categoria="ngModel"
+					class="form-control" 
+					id="Registercategoria" 
+					placeholder="Enter categoria">
+				</div>
+				<div class="form-group">
+					<label for="RegisterEmail">Descripcion</label>
+					<input type="text" name="descripcion" ngModel required #descripcion="ngModel"
+					class="form-control" 
+					id="RegisterEmail" 
+					placeholder="Enter descripcion">
+				</div>
+				<button type="submit" [disabled]="c.invalid" class="btn btn-primary">Registrar producto<i clas="fas fa-sign-in-alt"></i></button>
+				<h1>{{Caso1}}</h1>
+			</form>
+		</div>
+	</div>
+</div>

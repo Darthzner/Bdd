@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
 			next: (x:any) => console.log('El usuario ingreso.'),
 			error: (err:any) => console.log(err)
 		};
-
-		this.authService.login(f.value).subscribe(loginObserver);
 	}
 
 }
