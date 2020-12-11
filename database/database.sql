@@ -1,3 +1,4 @@
+
 CREATE DATABASE tienda;
 
 SET DATESTYLE TO 'European';
@@ -48,25 +49,6 @@ create table Detalle_de_venta(
     constraint FK_ven
         foreign key (ID_venta)
         references Venta(ID_venta),
-    constraint FK_prod
-        foreign key (ID_producto)
-        references Productos(ID_producto)
-);
-
-create table Compra(
-    ID_compra serial primary key,
-    Precio_total int,
-    Fecha_compra date
-);
-
-create table Detalle_de_compra(
-    ID_compra int,
-    ID_producto int,
-    Cantidad int,
-    Precio_unitario int,
-    constraint FK_comp
-        foreign key (ID_compra)
-        references Compra(ID_compra),
     constraint FK_prod
         foreign key (ID_producto)
         references Productos(ID_producto)
