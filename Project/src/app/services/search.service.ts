@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SearchService {
-  private api  = `http://190.163.174.21:5000/`;
+  private api  = `http://54.152.11.197:5000/`;
 
   constructor(private http: HttpClient) {}
 
