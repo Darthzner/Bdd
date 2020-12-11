@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-	readonly APIUrl= "http://190.163.174.21:5000";
+	readonly APIUrl= "http://54.152.11.197:5000";
 
 	constructor(private http:HttpClient) { }
 	
@@ -23,5 +23,8 @@ export class AuthService {
 	}
 	get_employer(model: any):Observable<any> {
 		return this.http.get(this.APIUrl + '/getEmployer?rut=' + model.rut).pipe(map((res:any)=>{return res;}));
+	}
+	add_producto(model: any) {
+		return this.http.post(this.APIUrl + '/addProducto', model);
 	}
 }

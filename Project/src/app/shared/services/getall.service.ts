@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class GetallService {
 
-	readonly APIUrl= "http://190.163.174.21:5000";
+	readonly APIUrl= "http://54.152.11.197:5000";
 
 	constructor(private http:HttpClient) { }
 
