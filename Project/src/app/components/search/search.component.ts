@@ -29,11 +29,8 @@ export class SearchComponent implements OnInit {
       this.product_item = JSON.stringify(obj);
       localStorage.setItem($e.nombre,this.product_item);
     }else{
-      console.log("hola")
       let value =JSON.parse(localStorage.getItem($e.nombre))
-      console.log(value.cantidad)
       value.cantidad = value.cantidad + x
-      console.log(value.cantidad)
       this.product_item = JSON.stringify(value);
       localStorage.setItem($e.nombre,this.product_item);
     }
