@@ -9,20 +9,29 @@
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Precio</th>
+          <th></th>
         </tr>
         <tr *ngFor="let item of CartItem | keyvalue">
-          <th>{{item.key}}</th>
-          <th>{{item.value.cantidad}}</th>
-          <th>{{Totalprice(item.key)}}</th>
-          <th><button (click)="RemoveItem(item.key)">Eliminar</button></th>
+          <td>{{item.key}}</td>
+          <td>{{item.value.cantidad}}</td>
+          <td>{{Totalprice(item.key)}}</td>
+          <td><button (click)="RemoveItem(item.key)">Eliminar</button></td>
         </tr>
       </table>
-      <div class="Compra">
-        <button>Comprar</button>
-      </div> 
   </div>
+  <div class="Compra">
+    <div class="Datos">
+      <input type="text" id="fname" name="RutC" placeholder="Rut Cliente" [(ngModel)]="rut_Client"><br><br>
+      <input type="text" id="lname" name="RutW" placeholder="Rut Trabajador" [(ngModel)]="rut_Worker"><br><br>
+      <button (click)="Buy()">Comprar</button>
+    </div>
+  </div>
+  <div class="Regreso">
+    <button routerLink="/">Regresar</button>  
+  </div> 
 </div>
 
-<a class="cta" href="#"><button routerLink="/">Regresar</button></a>
+
+
 
 

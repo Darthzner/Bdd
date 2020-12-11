@@ -1,4 +1,6 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { verify } from 'crypto';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -9,20 +11,17 @@ import { CartService } from '../../services/cart.service';
 
 export class CartComponent implements OnInit {
   public searchJson: any;
+  public rut_Client = "";
+  public rut_Worker = "";
   public CartItem = new Object();
+  public buyJson: any;
   constructor( private cartservice: CartService) {
     for(let x=0;x<localStorage.length;x++){
       let keyy = localStorage.key(x)
       let value = JSON.parse(localStorage.getItem(keyy)) 
       this.CartItem[keyy] = value;
-      console.log(this.CartItem[keyy])
-      //this.CartItem = this.cartservice.getCartItems();
     }
-  }
- /*clearCartItems() {
-    this.CartItem = {}
-    this.cartservice.clearCart
-  }*/
+  } 
   
   Totalprice(id:number){
     let value = JSON.parse(localStorage.getItem(id)) 
@@ -31,17 +30,30 @@ export class CartComponent implements OnInit {
   }
 
   Buy(){
-    
+    var venta = {
+      "Rut_cliente": Number(this.rut_Client), 
+      "Rut_trabajador": Number(this.rut_Worker), 
+      "detalle": {}
+    }
+    for(let x=0;x<localStorage.length;x++){
+      let keyy = localStorage.key(x)
+      let value = JSON.parse(localStorage.getItem(keyy))
+      let id:number = value.id_producto
+      venta.detalle[id] = value.cantidad
+    }
+    JSON.stringify(venta.detalle)
+    this.cartservice.CreateSale(venta)
+    .subscribe(respuesta => {
+      this.buyJson = respuesta
+    })
   }
 
   RemoveItem(id:number){
     localStorage.removeItem(id);
     delete this.CartItem[id];
-    console.log(localStorage);
   }
 
   ngOnInit(): void {
-    
   }
 }
   

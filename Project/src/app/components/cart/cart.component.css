@@ -18,7 +18,7 @@
   background: #FFFFFF;
   box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
   border-radius: 6px;
- 
+  box-shadow: 1px 2px 5px rgba(32, 32, 32, .3);
   display: flex;
   flex-direction: column;
 }
@@ -26,9 +26,35 @@
   height: 60px;
   border-bottom: 1px solid #E1E8EE;
   padding: 20px 30px;
-  color: #5E6977;
+  color: rgba(0, 136, 169, 0.8);
   font-size: 18px;
   font-weight: 400;
+}
+
+table{
+  position: relative;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 12px 12px 0 0;
+  background: #fafafa;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(32, 32, 32, .3);
+}
+
+th{
+  background: rgba(0, 169, 161, 0.767);
+  color: #fafafa;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+}
+
+td{
+  font-family: 'Roboto', sans-serif;
+}
+
+th,td{
+  padding: 12px 15px;
 }
 
 .descripcion{
@@ -40,12 +66,7 @@
   font-weight: 400;
 }
 
-th, td {
-  padding: 15px;
-}
-th {
-  text-align: left;
-}
+
 
 button{
 	margin-left: 10px;
@@ -62,6 +83,55 @@ button:hover{
 }
 
 .Compra{
-  margin: auto;
-  margin-bottom: 20px;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #E1E8EE;
 }
+
+.Datos{
+  width: 100%;
+  height: 200px;
+  display: block;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+}
+
+.Datos input{
+  border: 0;
+  background: none;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  border: 2px solid rgba(0, 136, 169, 1);
+  padding: 7px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.Datos input:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+.Regreso{
+  width: 100%;
+  height: 100px;
+  display: flex;
+	align-self: end;
+	align-items: center;
+}
+
+.Regreso button{
+  margin-right: auto;
+}
+
+
+
+
